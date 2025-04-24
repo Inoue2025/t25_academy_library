@@ -2,8 +2,10 @@ package jp.co.metateam.library.controller;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.ISBN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
+import jp.co.metateam.library.model.Account;
+import jp.co.metateam.library.model.AccountDto;
 import jp.co.metateam.library.model.BookMst;
 import jp.co.metateam.library.model.BookMstDto;
 import jp.co.metateam.library.service.BookMstService;
@@ -47,8 +51,23 @@ public class BookController {
         if (!model.containsAttribute("bookMstDto")) {
             model.addAttribute("bookMstDto", new BookMstDto());
         }
-
         return "book/add";
     }
-    
+
+  //新しくパスを追加、正常に動いたときに一覧に移動、index.htmlを参照
+  @PostMapping("/book/add")
+  public String add(@Valid @ModelAttribute BookMstDto bookMstDto, BindingResult result, Model model) {
+    boolean checkResult = bookMstService.checkList(bookMstDto,model);
+    if(checkResult){
+        return "book/add";
+    }
+    boolean checkIsResult = bookMstService.checkList(bookMstDto,model);
+    if(checkIsResult){
+        return "book/add";
+    }
+    bookMstService.save(bookMstDto);
+    return "redirect:/book/index";
+ }  
 }
+
+    

@@ -18,9 +18,36 @@
                     <form id="book_register_form" th:object="${bookMstDto}" th:action="@{/book/add}" method="post">
                         <div class="mb30 flexarea">
                             <span>
+                                <tr>
+                                    <span style="color:red;">*は必須項目です。</span></th>
                                 <a th:href="@{/book/index}" class="link">← 一覧へ戻る</a>
+                                <body>
+                                    <form action="#" method="post">
+                                         <p>書籍名* <br>
+                                        <input type="text" name ="title" th:field ="*{title}" placeholder ="書籍名を入力"></p>
+                                        <th>
+                                        </th>
+                                            <div class = "err_msg" th:if="${errtitle}">
+                                                <div th:each ="msg : ${errtitle}">
+                                                    <p th:text ="${msg}"></p>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <p>ISBN* <br>
+                                        <input text="text" name ="isbn" th:field ="*{isbn}" placeholder ="ISBNを入力"></p>
+                                            <div class = "err_msg" th:if="${errisbn}">
+                                                <div th:each ="msg : ${errisbn}">
+                                                    <p th:text ="${msg}"></p>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <p><input type="submit" value="保存">
+                                        </p>
+                                    </form>
+                                <body>
                             </span>
                         </div>
+                    <div></div>
                     </form>
                 </div>
             </div>
