@@ -61,10 +61,6 @@ public class BookController {
     if(checkResult){
         return "book/add";
     }
-    boolean checkIsResult = bookMstService.checkList(bookMstDto,model);
-    if(checkIsResult){
-        return "book/add";
-    }
     bookMstService.save(bookMstDto);
     return "redirect:/book/index";
  }  
