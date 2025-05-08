@@ -23,7 +23,8 @@
                                 <a th:href="@{/book/index}" class="link">← 一覧へ戻る</a>
                                 <body>
                                     <form action="#" method="post">
-                                         <p>書籍名* <br>
+                                         <p>書籍名<span style="color:red;">*</span>
+                                                <br>
                                         <input type="text" name ="title" th:field ="*{title}" placeholder ="書籍名を入力"></p>
                                         <th>
                                         </th>
@@ -33,7 +34,8 @@
                                                 </div>
                                             </div>
                                         </th>
-                                        <p>ISBN* <br>
+                                        <p>ISBN <span style="color:red;">*</span>
+                                            <br>
                                         <input text="text" name ="isbn" th:field ="*{isbn}" placeholder ="ISBNを入力"></p>
                                             <div class = "err_msg" th:if="${errisbn}">
                                                 <div th:each ="msg : ${errisbn}">
